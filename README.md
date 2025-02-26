@@ -1,88 +1,77 @@
-# Discord Ticket Bot
- 
- This bot allows server members to create support tickets with a reason, and admins can manage the tickets efficiently. Admins can also generate a transcript of the ticket for record-keeping.
+📜 README.md for Discord RP Ticket Bot
+md
+Copy
+Edit
+# 🎫 Discord RP Ticket Bot
 
-## Features:
-**1. Create Tickets:** Users can create a ticket with a specified reason, which will be sent to the admins for review.
+A **Discord Ticket Bot** designed for **Roleplay Servers**. This bot allows users to create support tickets with categories, assign staff, and generate transcripts.
 
-**2. Ticket Transcripts:** Admins can take a transcript of the ticket for documentation purposes.
+---
 
-## Getting Started
-### Prerequisites
+## 🚀 Features
 
- - Node.js
- - PM2 (Process Manager)
+- **Custom Ticket Panel** with categories  
+- **Role-based Permissions** (Only Admins can close tickets)  
+- **Ticket Transcripts** (Saved in a log channel)  
+- **Staff Assignment System** (Assign support staff to tickets)  
+- **Reopen & Close Tickets** with embed messages  
+- **Fully Embedded Messages** for a professional look  
 
-### Installation
-**1. Clone the repository:** Clone the repository to your local machine and navigate to the repository directory.
+---
 
-**2. Rename the example environment file: Rename `example.env` to `.env`.**
+## 🛠️ Installation
 
-**3. Add your Discord bot token and other necessary information to the `.env` file:**
-```
-TOKEN = your_discord_bot_token
-ClientID = your_admin_channel_id
-GuildID = your_guild_id
-```
-**4. Install dependencies:** Run `npm install` to install all necessary packages.
+### **1️⃣ Clone the Repository**
+```sh
+git clone https://github.com/SrivatsaMG/Discord-Rp-ticketbot.git
+cd Discord-Rp-ticketbot
+2️⃣ Install Dependencies
+sh
+Copy
+Edit
+npm install
+3️⃣ Configure Environment Variables
+Create a .env file in the project directory and add the following:
 
-### Starting the Bot
-#### Start the bot using the following command:
+ini
+Copy
+Edit
+TOKEN=your_bot_token
+ClientID=your_client_id
+GuildID=your_guild_id
 
-```
-node start.js
-```
+ServerName=Your Server Name
+ServerLogo=https://yourlogo.png
+Thumbnail=https://yourthumbnail.png
+Image=https://yourimage.png
 
-## Managing the Bot with PM2
+AdminRoleID=YOUR_ADMIN_ROLE_ID
+TicketSetUpChannel=YOUR_TICKET_SETUP_CHANNEL_ID
+TranscriptChannelID=YOUR_TRANSCRIPT_CHANNEL_ID
+TicketCategoryID=YOUR_TICKET_CATEGORY_ID
+4️⃣ Run the Bot
+sh
+Copy
+Edit
+node index.js
+🎮 Commands
+Command	Description
+/setupticket	Setup the ticket panel in a channel
+Click "Create Ticket"	Opens a support ticket
+Close Ticket	Closes the ticket (Admin only)
+Reopen Ticket	Reopens a closed ticket
+Assign Staff	Assigns a support staff to a ticket
+Transcript Ticket	Saves a transcript of the ticket
+📜 Example Embedded Panel
+markdown
+Copy
+Edit
+🎫 **Support Ticket Panel**
+-----------------------------------
+📌 **Select a category:**
+- 💰 Billing
+- 🛠️ Technical Support
+- ❓ General Inquiry
 
-- **View processes:**
-    ``` bash
-    pm2 list
-    ```
-- **Restart your bot:**
-    ```bash
-    pm2 restart bot
-    ```
-
-- **Stop your application:**
-    ```bash
-    pm2 stop bot
-    ```
-
-- **Monitor logs:**
-    ```bash
-    pm2 logs bot
-    ```
-
-## Initial Setup
-
-Use the /setupticket command for the initial setup.
-
-## Commands
-- **/setupticket:** Configures the ticketing system.
-
-## Screenshots
-
-<img src = ".github/images/1.png">
-
-<img src = ".github/images/2.png">
-
-<img src = ".github/images/3.png">
-
-## Troubleshooting
-- Bot not starting:
-    - Make sure `example.env` has been renamed to `.env`.
-    - Ensure the bot token is added correctly in `.env`.
-    - Run `npm install` to ensure all dependencies are installed.
-
-- Commands not working:
-
-    - Verify that the bot has the required permissions.
-    - Check if the bot is online and connected to the correct server.
-
-## License
-
-**This project is licensed under the LGPL License. See the [LICENCE](https://github.com/Rage-Gaming/Discord-ticket-bot/blob/main/LICENSE). file for details.**
-
-## Support
-**If you have any questions or need help, feel free to contact me on Discord: [Join Now](https://discord.gg/bDaYd2P9Vu).**
+✅ Click "Create Ticket" to open a new ticket.
+🔒 Close Ticket | 👤 Assign Staff | 📜 Transcript
