@@ -65,7 +65,7 @@ module.exports = async (interaction) => {
         await interaction.deferReply({ ephemeral: true }); 
         const selectedCategory = interaction.values[0];
         userSelections.set(interaction.user.id, selectedCategory);
-        await interaction.editReply({ content: `✅ You selected **${selectedCategory}**. Now click "Create Ticket"!` });
+        await interaction.editReply({ content: `✅ You selected **${selectedCategory}**. Now click \"Create Ticket\"!` });
     }
 
     // ✅ CREATE A TICKET
@@ -80,7 +80,7 @@ module.exports = async (interaction) => {
             name: `ticket-${ticketNumber}`,
             type: ChannelType.GuildText,
             parent: process.env.TicketCategoryID,
-            topic: interaction.user.id, // ✅ Storing User ID in Channel Topic ✅
+            topic: `Ticket Owner: ${interaction.user.id} | Category: ${category}`,
             permissionOverwrites: [
                 { id: interaction.guild.roles.everyone, deny: [PermissionsBitField.Flags.ViewChannel] },
                 { id: interaction.user.id, allow: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.SendMessages] },
@@ -112,9 +112,11 @@ module.exports = async (interaction) => {
             return interaction.reply({ content: "🚫 Only admins can close tickets!", ephemeral: true });
         }
 
-        const closedBy = interaction.user.id; // ✅ Store the user who closed the ticket
-        const ticketCreatorId = interaction.channel.topic; 
-        const creatorMention = ticketCreatorId ? `<@${ticketCreatorId}>` : "Unknown User"; 
+        const closedBy = interaction.user.id;
+        const ticketInfo = interaction.channel.topic.split(" | ");
+        const ticketCreatorId = ticketInfo[0].replace("Ticket Owner: ", "");
+        const category = ticketInfo[1].replace("Category: ", "");
+        const creatorMention = ticketCreatorId ? `<@${ticketCreatorId}>` : "Unknown User";
 
         const transcript = await createTranscript(interaction.channel, {
             returnType: "attachment",
@@ -129,7 +131,7 @@ module.exports = async (interaction) => {
             });
         }
 
-        if (process.env.DMNotification_Transcript === "true") {
+        if (process.env.DMNotification_Transcript === "true" && category !== "general") {
             if (ticketCreatorId) {
                 const user = await interaction.guild.members.fetch(ticketCreatorId).catch(() => null);
                 if (user) {
